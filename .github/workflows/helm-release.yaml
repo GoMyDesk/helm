@@ -1,4 +1,4 @@
-name: release
+name: HELM Release
 on:
   push:
     tags: '*'
@@ -9,6 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Publish Helm charts
-        uses: stefanprodan/helm-gh-pages@master
+        uses: J12934/helm-gh-pages-action@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
