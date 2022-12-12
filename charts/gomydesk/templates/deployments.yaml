@@ -83,5 +83,5 @@ spec:
     {{- end }}
       securityContext:
         runAsUser: 65532
-      terminationGracePeriodSeconds: 10
+      terminationGracePeriodSeconds: 15
       serviceAccountName: {{ include "gomydesk.serviceAccountName" . }}
