@@ -30,5 +30,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.4.1
         with:
           charts_dir: charts
+          charts_repo_url: https://gomydesk.github.io/gomydesk
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
