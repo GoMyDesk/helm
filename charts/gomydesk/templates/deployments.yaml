@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "kvdi.labels" . | nindent 4 }}
-  name: {{ include "kvdi.fullname" . }}-manager
+    {{- include "gomydesk.labels" . | nindent 4 }}
+  name: {{ include "gomydesk.fullname" . }}-manager
 spec:
   replicas: {{ .Values.manager.replicaCount }}
   selector:
     matchLabels:
-      {{- include "kvdi.selectorLabels" . | nindent 6 }}
+      {{- include "gomydesk.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "kvdi.labels" . | nindent 8 }}
+        {{- include "gomydesk.labels" . | nindent 8 }}
     spec:
       containers:
         - args:
@@ -60,7 +60,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: OPERATOR_NAME
-              value: "kvdi"
+              value: "gomydesk"
           {{- with .Values.manager.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -84,4 +84,4 @@ spec:
       securityContext:
         runAsUser: 65532
       terminationGracePeriodSeconds: 10
-      serviceAccountName: {{ include "kvdi.serviceAccountName" . }}
+      serviceAccountName: {{ include "gomydesk.serviceAccountName" . }}

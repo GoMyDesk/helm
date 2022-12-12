@@ -1,9 +1,9 @@
 # Default values for gomydesk.
 
 # nameOverride -- A name override for resources created by the chart.
-nameOverride: ""
+nameOverride: ''
 # fullnameOverride -- A full name override for resources created by the chart.
-fullnameOverride: ""
+fullnameOverride: ''
 
 rbac:
   # rbac.proxy -- RBAC Proxy configurations for the manager deployment
@@ -27,7 +27,7 @@ manager:
     # manager.image.repository -- The repository and image for the manager.
     repository: ghcr.io/gomydesk/manager
     # manager.image.tag -- The tag for the manager image. Defaults to the chart version.
-    tag: ""
+    tag: ''
     # manager.image.pullPolicy -- The `ImagePullPolicy` to use for the manager pod.
     pullPolicy: IfNotPresent
   # manager.imagePullSecrets -- Image pull secrets for the manager pod.
@@ -66,7 +66,7 @@ vdi:
     app:
       # vdi.spec.app.image -- The image to use for app pods.
       # @default -- `ghcr.io/gomydesk/gomydesk:app-${VERSION}`
-      image: "ghcr.io/gomydesk/gomydesk:app-${VERSION}"
+      image: 'ghcr.io/gomydesk/app:${VERSION}'
       # vdi.spec.app.corsEnabled -- Enables CORS headers in API responses.
       corsEnabled: false
       # vdi.spec.app.auditLog -- Enables a detailed audit log of API events.
@@ -82,12 +82,12 @@ vdi:
       tls:
         # vdi.spec.app.tls.serverSecret -- A pre-existing TLS secret to use for the HTTPS listener on the app instance.
         # If not provided, one is generated for you.
-        serverSecret: ""
+        serverSecret: ''
       # vdi.spec.app.resources -- Resource limits for the app pods.
       resources: {}
     # vdi.spec.metrics -- Metrics configurations for `gomydesk`.
     metrics:
-      # vdi.spec.metrics.serviceMonitor -- Configurations for creating a ServiceMonitor object to 
+      # vdi.spec.metrics.serviceMonitor -- Configurations for creating a ServiceMonitor object to
       # scrape `gomydesk` metrics.
       serviceMonitor:
         # vdi.spec.metrics.serviceMonitor.create -- Set to true to have `gomydesk` create a ServiceMonitor.
@@ -103,10 +103,10 @@ vdi:
       allowAnonymous: false
       # vdi.spec.auth.adminSecret -- The secret to store the generated admin password in.
       adminSecret: gomydesk-admin-secret
-      # vdi.spec.auth.tokenDuration -- The time-to-live for access tokens issued to users. 
+      # vdi.spec.auth.tokenDuration -- The time-to-live for access tokens issued to users.
       # If using OIDC/Oauth, you probably want to set this to a higher value, since refreshing
       # tokens is currently not supported.
-      tokenDuration: "15m"
+      tokenDuration: '15m'
       # vdi.spec.auth.localAuth -- Use local-auth for the authentication backend. This is the default configuration.
       localAuth: {}
       # vdi.spec.auth.ldapAuth -- (object) Use an LDAP server for the authentication backend. See the [API reference](../../../doc/crds.md#LDAPConfig) for available configurations.
@@ -129,7 +129,7 @@ vdi:
     desktops:
       # vdi.spec.desktops.maxSessionLength -- When configured, desktop sessions will be terminated after running
       # for the specified period of time. Values are in duration formats (e.g. `3m`, `2h`, `1d`).
-      maxSessionLength: ""
+      maxSessionLength: ''
 
   # vdi.templates -- Preload DesktopTemplates into the VDI Cluster. You only need to define
   # the `metadata` and `spec`. Namespaces can be ignored sinced DesktopTemplates are cluster-scoped.

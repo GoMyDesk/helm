@@ -1,7 +1,7 @@
-apiVersion: app.kvdi.io/v1
+apiVersion: app.gomydesk.io/v1
 kind: VDICluster
 metadata:
-  name: kvdi
+  name: gomydesk
   labels:
     {{-  toYaml .Values.vdi.labels | nindent 4 }}
 spec:
@@ -9,7 +9,7 @@ spec:
 
 {{ range $idx, $tmpl := .Values.vdi.templates }}
 ---
-apiVersion: desktops.kvdi.io/v1
+apiVersion: desktops.gomydesk.io/v1
 kind: Template
 metadata:
   {{ toYaml $tmpl.metadata | nindent 2 }}
