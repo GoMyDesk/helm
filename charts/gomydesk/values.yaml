@@ -44,6 +44,14 @@ manager:
   tolerations: []
   # manager.affinity -- Node affinity for the manager pod.
   affinity: {}
+ingress:
+  enabled: true
+  hostname: desktop.gomydesk.com
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: 'HTTPS'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  tls: true
 
 vdi:
   # vdi.labels -- Extra labels to apply to gomydesk related resources.
@@ -60,22 +68,28 @@ vdi:
     imagePullSecrets: []
     # vdi.spec.userdataSpec -- If configured, enables userdata persistence with
     # the given PVC spec. Every user will receive their own PV with the provided configuration.
-    userdataSpec: {}
+    userdataSpec:
+      storageClassName: efs-sc
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1G
     # vdi.spec.app -- App level configurations for `gomydesk`.
     # @default -- The values described below are the same as the `VDICluster` CRD defaults.
     app:
       # vdi.spec.app.image -- The image to use for app pods.
       # @default -- `ghcr.io/gomydesk/gomydesk:app-${VERSION}`
-      image: 'ghcr.io/gomydesk/app:${VERSION}'
+      image: 'ghcr.io/gomydesk/app:v0.1.2'
       # vdi.spec.app.corsEnabled -- Enables CORS headers in API responses.
-      corsEnabled: false
+      corsEnabled: true
       # vdi.spec.app.auditLog -- Enables a detailed audit log of API events.
       # At the moment, these just get logged to stdout on the app instance.
       auditLog: false
       # vdi.spec.app.replicas -- The number of app replicas to run.
       replicas: 1
       # vdi.spec.app.serviceType -- The type of service to create in front of the app instance.
-      serviceType: LoadBalancer
+      serviceType: ClusterIP
       # vdi.spec.app.serviceAnnotations -- Extra annotations to place on the gomydesk app service.
       serviceAnnotations: {}
       # vdi.spec.app.tls -- TLS configurations for the app instance.

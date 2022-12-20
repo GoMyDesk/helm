@@ -2,13 +2,23 @@ apiVersion: v1
 entries:
   gomydesk:
   - apiVersion: v2
-    appVersion: v0.3.6
-    created: "2022-12-11T19:46:36.606874-08:00"
+    appVersion: v0.1.1
+    created: "2022-12-11T20:49:26.705372-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
-    digest: ebfbb7f09646d062805120116942033296eb8f244a4d4fffea27b7215272a13c
+    digest: 369dc17a69f6155845120e368584af0633ce12eb683a0edd454c81d2adbd9ec5
     name: gomydesk
     type: application
     urls:
-    - gomydesk-v0.3.6.tgz
-    version: v0.3.6
-generated: "2022-12-11T19:46:36.605603-08:00"
+    - gomydesk-v0.1.1.tgz
+    version: v0.1.1
+  - apiVersion: v2
+    appVersion: v0.1.0
+    created: "2022-12-11T20:49:26.704442-08:00"
+    description: A Kubernetes-Native Virtual Desktop Infrastructure
+    digest: d8ccda0d893ab80689f55623c2188d550fc62f8eb78a5a4edcc19131c5d12feb
+    name: gomydesk
+    type: application
+    urls:
+    - gomydesk-v0.1.0.tgz
+    version: v0.1.0
+generated: "2022-12-11T20:49:26.702503-08:00"
