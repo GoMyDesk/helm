@@ -51,6 +51,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: 'HTTPS'
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
   tls: true
 
 vdi:
@@ -106,7 +107,7 @@ vdi:
       serviceMonitor:
         # vdi.spec.metrics.serviceMonitor.create -- Set to true to have `gomydesk` create a ServiceMonitor.
         # There is an example dashboard in the [examples](../../examples/example-grafana-dashboard.json) directory.
-        create: false
+        create: true
         # vdi.spec.metrics.serviceMonitor.labels -- Extra labels to apply to the ServiceMonitor object.
         labels:
           release: prometheus

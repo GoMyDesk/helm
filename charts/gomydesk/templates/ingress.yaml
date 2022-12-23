@@ -2,7 +2,7 @@
 apiVersion:  networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "gomydesk.fullname" . }}-ingress
+  name: {{ include "gomydesk.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
   {{- include "gomydesk.labels" . | nindent 4 }}
