@@ -79,12 +79,9 @@ vdi:
     # vdi.spec.app -- App level configurations for `gomydesk`.
     # @default -- The values described below are the same as the `VDICluster` CRD defaults.
     app:
-      labels:
-        app: app
-        version: v0.1.2
       # vdi.spec.app.image -- The image to use for app pods.
       # @default -- `ghcr.io/gomydesk/gomydesk:app-${VERSION}`
-      image: 'ghcr.io/gomydesk/app:v0.1.2'
+      image: 'ghcr.io/gomydesk/app:v0.1.3'
       # vdi.spec.app.corsEnabled -- Enables CORS headers in API responses.
       corsEnabled: true
       # vdi.spec.app.auditLog -- Enables a detailed audit log of API events.
