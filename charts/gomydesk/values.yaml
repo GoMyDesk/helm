@@ -81,7 +81,7 @@ vdi:
     app:
       # vdi.spec.app.image -- The image to use for app pods.
       # @default -- `ghcr.io/gomydesk/gomydesk:app-${VERSION}`
-      image: 'ghcr.io/gomydesk/app:v0.1.6'
+      image: 'ghcr.io/gomydesk/app:v0.1.7'
       # vdi.spec.app.corsEnabled -- Enables CORS headers in API responses.
       corsEnabled: true
       # vdi.spec.app.auditLog -- Enables a detailed audit log of API events.
