@@ -40,6 +40,7 @@ helm.sh/chart: {{ include "gomydesk.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/name: manager
 app: manager
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -49,7 +50,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "gomydesk.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "gomydesk.name" . }}
+app.kubernetes.io/name: manager
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
