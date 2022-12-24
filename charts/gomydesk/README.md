@@ -85,8 +85,6 @@ helm install gomydesk gomydesk/gomydesk \
 | vdi.spec | object | The values described below are the same as the `VDICluster` CRD defaults. | The `VDICluster` spec. |
 | vdi.spec.app | object | The values described below are the same as the `VDICluster` CRD defaults. | App level configurations for `gomydesk`. |
 | vdi.spec.app.auditLog | bool | `false` | Enables a detailed audit log of API events. At the moment, these just get logged to stdout on the app instance. |
-| vdi.spec.app.corsEnabled | bool | `true` | Enables CORS headers in API responses. |
-| vdi.spec.app.image | string | `ghcr.io/gomydesk/gomydesk:app-${VERSION}` | The image to use for app pods. |
 | vdi.spec.app.replicas | int | `1` | The number of app replicas to run. |
 | vdi.spec.app.resources | object | `{}` | Resource limits for the app pods. |
 | vdi.spec.app.serviceAnnotations | object | `{}` | Extra annotations to place on the gomydesk app service. |
