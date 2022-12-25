@@ -84,15 +84,19 @@ vdi:
       # image: 'ghcr.io/gomydesk/app:${VERSION}'
       # vdi.spec.app.corsEnabled -- Enables CORS headers in API responses.
       corsEnabled: true
+
       # vdi.spec.app.auditLog -- Enables a detailed audit log of API events.
       # At the moment, these just get logged to stdout on the app instance.
-      auditLog: false
+      auditLog: true
       # vdi.spec.app.replicas -- The number of app replicas to run.
       replicas: 1
       # vdi.spec.app.serviceType -- The type of service to create in front of the app instance.
       serviceType: ClusterIP
       # vdi.spec.app.serviceAnnotations -- Extra annotations to place on the gomydesk app service.
-      serviceAnnotations: {}
+      serviceAnnotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/api/metrics'
       # vdi.spec.app.tls -- TLS configurations for the app instance.
       tls:
         # vdi.spec.app.tls.serverSecret -- A pre-existing TLS secret to use for the HTTPS listener on the app instance.
@@ -107,10 +111,14 @@ vdi:
       serviceMonitor:
         # vdi.spec.metrics.serviceMonitor.create -- Set to true to have `gomydesk` create a ServiceMonitor.
         # There is an example dashboard in the [examples](../../examples/example-grafana-dashboard.json) directory.
-        create: true
+        create: false
         # vdi.spec.metrics.serviceMonitor.labels -- Extra labels to apply to the ServiceMonitor object.
         labels:
           release: prometheus
+      prometheus:
+        create: false
+      grafana:
+        enabled: false
     # vdi.spec.auth -- Authentication configurations for `gomydesk`.
     # @default -- The values described below are the same as the `VDICluster` CRD defaults.
     auth:

@@ -84,10 +84,10 @@ helm install gomydesk gomydesk/gomydesk \
 | vdi.labels | object | `{"component":"gomydesk-cluster"}` | Extra labels to apply to gomydesk related resources. |
 | vdi.spec | object | The values described below are the same as the `VDICluster` CRD defaults. | The `VDICluster` spec. |
 | vdi.spec.app | object | The values described below are the same as the `VDICluster` CRD defaults. | App level configurations for `gomydesk`. |
-| vdi.spec.app.auditLog | bool | `false` | Enables a detailed audit log of API events. At the moment, these just get logged to stdout on the app instance. |
+| vdi.spec.app.auditLog | bool | `true` | Enables a detailed audit log of API events. At the moment, these just get logged to stdout on the app instance. |
 | vdi.spec.app.replicas | int | `1` | The number of app replicas to run. |
 | vdi.spec.app.resources | object | `{}` | Resource limits for the app pods. |
-| vdi.spec.app.serviceAnnotations | object | `{}` | Extra annotations to place on the gomydesk app service. |
+| vdi.spec.app.serviceAnnotations | object | `{"prometheus.io/path":"/api/metrics","prometheus.io/port":"8080","prometheus.io/scrape":"true"}` | Extra annotations to place on the gomydesk app service. |
 | vdi.spec.app.serviceType | string | `"ClusterIP"` | The type of service to create in front of the app instance. |
 | vdi.spec.app.tls | object | `{"serverSecret":""}` | TLS configurations for the app instance. |
 | vdi.spec.app.tls.serverSecret | string | `""` | A pre-existing TLS secret to use for the HTTPS listener on the app instance. If not provided, one is generated for you. |
@@ -102,9 +102,9 @@ helm install gomydesk gomydesk/gomydesk \
 | vdi.spec.desktops | object | `{"maxSessionLength":""}` | Global configurations for desktop sessions. |
 | vdi.spec.desktops.maxSessionLength | string | `""` | When configured, desktop sessions will be terminated after running for the specified period of time. Values are in duration formats (e.g. `3m`, `2h`, `1d`). |
 | vdi.spec.imagePullSecrets | list | `[]` | Image pull secrets to use for app containers. |
-| vdi.spec.metrics | object | `{"serviceMonitor":{"create":true,"labels":{"release":"prometheus"}}}` | Metrics configurations for `gomydesk`. |
-| vdi.spec.metrics.serviceMonitor | object | `{"create":true,"labels":{"release":"prometheus"}}` | Configurations for creating a ServiceMonitor object to scrape `gomydesk` metrics. |
-| vdi.spec.metrics.serviceMonitor.create | bool | `true` | Set to true to have `gomydesk` create a ServiceMonitor. There is an example dashboard in the [examples](../../examples/example-grafana-dashboard.json) directory. |
+| vdi.spec.metrics | object | `{"grafana":{"enabled":false},"prometheus":{"create":false},"serviceMonitor":{"create":false,"labels":{"release":"prometheus"}}}` | Metrics configurations for `gomydesk`. |
+| vdi.spec.metrics.serviceMonitor | object | `{"create":false,"labels":{"release":"prometheus"}}` | Configurations for creating a ServiceMonitor object to scrape `gomydesk` metrics. |
+| vdi.spec.metrics.serviceMonitor.create | bool | `false` | Set to true to have `gomydesk` create a ServiceMonitor. There is an example dashboard in the [examples](../../examples/example-grafana-dashboard.json) directory. |
 | vdi.spec.metrics.serviceMonitor.labels | object | `{"release":"prometheus"}` | Extra labels to apply to the ServiceMonitor object. |
 | vdi.spec.secrets | object | The values described below are the same as the `VDICluster` CRD defaults. | Secret storage configurations for `gomydesk`. |
 | vdi.spec.secrets.k8sSecret | object | `{"secretName":"gomydesk-app-secrets"}` | Use the Kubernetes secret storage backend. This is the default if no other configuration is provided. For now, see the API reference for what to use in place of these values if using a different backend. |

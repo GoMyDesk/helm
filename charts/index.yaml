@@ -2,10 +2,20 @@ apiVersion: v1
 entries:
   gomydesk:
   - apiVersion: v2
-    appVersion: v0.1.11
-    created: "2022-12-24T17:08:15.237413-08:00"
+    appVersion: v0.1.12
+    created: "2022-12-24T18:36:04.022281-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
-    digest: db54218351455d9ea70e035cf7bb588712bfedf9c67c9f9199c11b2e028aa5d6
+    digest: 05d42142e78102d5aad9f62b51ddc8eb018611edaef6490e0e2483e30c970b7a
+    name: gomydesk
+    type: application
+    urls:
+    - gomydesk-v0.1.12.tgz
+    version: v0.1.12
+  - apiVersion: v2
+    appVersion: v0.1.11
+    created: "2022-12-24T18:36:04.021318-08:00"
+    description: A Kubernetes-Native Virtual Desktop Infrastructure
+    digest: f2571c1072ad17036f65cc1d586144ed24ffd5f9e00370c42346206e626369d6
     name: gomydesk
     type: application
     urls:
@@ -13,7 +23,7 @@ entries:
     version: v0.1.11
   - apiVersion: v2
     appVersion: v0.1.10
-    created: "2022-12-24T17:08:15.236038-08:00"
+    created: "2022-12-24T18:36:04.019803-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: 66b06fa1deeee0de00ef7a789b28e3da3701146400f6ac57ab0f12bbc604de1c
     name: gomydesk
@@ -23,7 +33,7 @@ entries:
     version: v0.1.10
   - apiVersion: v2
     appVersion: v0.1.9
-    created: "2022-12-24T17:08:15.250702-08:00"
+    created: "2022-12-24T18:36:04.036789-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: e93097cdfb57e633713641a73f72e3548a3ea2ddd99efe7f343dedaf11132892
     name: gomydesk
@@ -33,7 +43,7 @@ entries:
     version: v0.1.9
   - apiVersion: v2
     appVersion: v0.1.8
-    created: "2022-12-24T17:08:15.249073-08:00"
+    created: "2022-12-24T18:36:04.035111-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: b501265abf165cacaa0d085b5c3b110fa04bc7dbdf785124b07b226cbe588c63
     name: gomydesk
@@ -43,7 +53,7 @@ entries:
     version: v0.1.8
   - apiVersion: v2
     appVersion: v0.1.7
-    created: "2022-12-24T17:08:15.24743-08:00"
+    created: "2022-12-24T18:36:04.033682-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: 94ab2285fdaf5042cb31b69e4b40190dd074eb0f890e7a3832427dce68820045
     name: gomydesk
@@ -53,7 +63,7 @@ entries:
     version: v0.1.7
   - apiVersion: v2
     appVersion: v0.1.6
-    created: "2022-12-24T17:08:15.245853-08:00"
+    created: "2022-12-24T18:36:04.032218-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: 28ad269a77bb5b2c7a3ac60c998c19f36be1c956ff028484ab2b17b6206343f2
     name: gomydesk
@@ -63,7 +73,7 @@ entries:
     version: v0.1.6
   - apiVersion: v2
     appVersion: v0.1.5
-    created: "2022-12-24T17:08:15.244378-08:00"
+    created: "2022-12-24T18:36:04.030594-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: 2456364efbdfb92bc875ab94a7cc2336a0283ca16383d543692d7fbc0322dbc9
     name: gomydesk
@@ -73,7 +83,7 @@ entries:
     version: v0.1.5
   - apiVersion: v2
     appVersion: v0.1.4
-    created: "2022-12-24T17:08:15.242979-08:00"
+    created: "2022-12-24T18:36:04.02904-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: f5e56e019ebdbbe77f940257902e59ba9b7588fc670436e87103c90ae17bb302
     name: gomydesk
@@ -83,7 +93,7 @@ entries:
     version: v0.1.4
   - apiVersion: v2
     appVersion: v0.1.3
-    created: "2022-12-24T17:08:15.240529-08:00"
+    created: "2022-12-24T18:36:04.026047-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: 0fcb97227cb6e0ed7b65deba1972b2249ebb4612e4dc8efbe00a6607a6b4c093
     name: gomydesk
@@ -93,7 +103,7 @@ entries:
     version: v0.1.3
   - apiVersion: v2
     appVersion: v0.1.2
-    created: "2022-12-24T17:08:15.23912-08:00"
+    created: "2022-12-24T18:36:04.024216-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: e6b5f9de6a325807249767bac323fac6929264ff4f1dec36bb07b0e4e1110ab8
     name: gomydesk
@@ -103,7 +113,7 @@ entries:
     version: v0.1.2
   - apiVersion: v2
     appVersion: v0.1.1
-    created: "2022-12-24T17:08:15.234634-08:00"
+    created: "2022-12-24T18:36:04.018249-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: 369dc17a69f6155845120e368584af0633ce12eb683a0edd454c81d2adbd9ec5
     name: gomydesk
@@ -113,7 +123,7 @@ entries:
     version: v0.1.1
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2022-12-24T17:08:15.233218-08:00"
+    created: "2022-12-24T18:36:04.01526-08:00"
     description: A Kubernetes-Native Virtual Desktop Infrastructure
     digest: d8ccda0d893ab80689f55623c2188d550fc62f8eb78a5a4edcc19131c5d12feb
     name: gomydesk
@@ -121,4 +131,4 @@ entries:
     urls:
     - gomydesk-v0.1.0.tgz
     version: v0.1.0
-generated: "2022-12-24T17:08:15.230309-08:00"
+generated: "2022-12-24T18:36:04.013082-08:00"

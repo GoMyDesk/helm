@@ -11,6 +11,10 @@ spec:
       {{- include "gomydesk.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/api/metrics"
       labels:
         {{- include "gomydesk.labels" . | nindent 8 }}
     spec:
