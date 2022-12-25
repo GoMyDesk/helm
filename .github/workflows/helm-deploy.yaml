@@ -19,7 +19,9 @@ jobs:
       - name: Set Kube Config
         run: |
           aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-          echo "KUBE_CONFIG_DATA=$(cat ~/.kube/config | base64)" >> $GITHUB_ENV
+          echo 'KUBE_CONFIG_DATA<<EOF' >> $GITHUB_ENV
+          echo $(cat ~/.kube/config | base64) >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
 
       - name: helm deploy
         uses: koslib/helm-eks-action@v1.25.2
