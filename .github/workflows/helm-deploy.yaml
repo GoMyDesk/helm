@@ -16,7 +16,7 @@ jobs:
 
       - name: Set Kube Config
         run: |
-          aws eks update-kubeconfig --name k8s --region eu-south-1
+          aws eks update-kubeconfig --name gomydesk --region eu-south-1
           echo 'KUBE_CONFIG_DATA<<EOF' >> $GITHUB_ENV
           echo "KUBE_CONFIG_DATA=$(cat ~/.kube/config | base64)" >> $GITHUB_ENV
           echo $(cat ~/.kube/config)
@@ -29,4 +29,4 @@ jobs:
           ENV: ${{ steps.extract_branch.outputs.branch }}
           IMAGE_TAG: ${{ github.sha }}
         with:
-          command: helm upgrade gomydesk --install --wait k8s
+          command: helm upgrade gomydesk --install --wait gomydesk
