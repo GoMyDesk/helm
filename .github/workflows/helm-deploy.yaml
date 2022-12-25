@@ -23,6 +23,15 @@ jobs:
           echo $(cat ~/.kube/config | base64) >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
+      - name: helm add repo
+        uses: koslib/helm-eks-action@v1.25.2
+        env:
+          KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
+          ENV: ${{ steps.extract_branch.outputs.branch }}
+          IMAGE_TAG: ${{ github.sha }}
+        with:
+          command: helm repo add gomydesk https://gomydesk.github.io/helm/charts
+
       - name: helm deploy
         uses: koslib/helm-eks-action@v1.25.2
         env:
