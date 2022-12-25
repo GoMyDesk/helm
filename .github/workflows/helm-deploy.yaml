@@ -1,0 +1,32 @@
+name: Deploy
+on: ['deployment']
+
+jobs:
+  deployment:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-south-1
+
+      - name: Set Kube Config
+        run: |
+          aws eks update-kubeconfig --name k8s --region eu-south-1
+          echo 'KUBE_CONFIG_DATA<<EOF' >> $GITHUB_ENV
+          echo "KUBE_CONFIG_DATA=$(cat ~/.kube/config | base64)" >> $GITHUB_ENV
+          echo $(cat ~/.kube/config)
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: helm deploy
+        uses: koslib/helm-eks-action@v1.25.2
+        env:
+          KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
+          ENV: ${{ steps.extract_branch.outputs.branch }}
+          IMAGE_TAG: ${{ github.sha }}
+        with:
+          command: helm upgrade gomydesk --install --wait k8s
