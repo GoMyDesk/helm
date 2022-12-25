@@ -30,4 +30,4 @@ jobs:
           ENV: ${{ steps.extract_branch.outputs.branch }}
           IMAGE_TAG: ${{ github.sha }}
         with:
-          command: helm upgrade gomydesk --install --wait gomydesk
+          command: helm upgrade gomydesk gomydesk/gomydesk
