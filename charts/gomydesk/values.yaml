@@ -1,5 +1,6 @@
 # Default values for gomydesk.
-
+env: dev
+appVersion: v0.1.1
 # nameOverride -- A name override for resources created by the chart.
 nameOverride: ''
 # fullnameOverride -- A full name override for resources created by the chart.
@@ -25,7 +26,10 @@ manager:
   replicaCount: 1
   image:
     # manager.image.repository -- The repository and image for the manager.
-    repository: ghcr.io/gomydesk/manager
+    repository:
+      dev: localhost:5000/gomydesk/manager
+      staging: ghcr.io/gomydesk/manager
+      prod: ghcr.io/gomydesk/manager
     # manager.image.tag -- The tag for the manager image. Defaults to the chart version.
     tag: ''
     # manager.image.pullPolicy -- The `ImagePullPolicy` to use for the manager pod.
@@ -45,8 +49,13 @@ manager:
   # manager.affinity -- Node affinity for the manager pod.
   affinity: {}
 ingress:
-  enabled: true
-  hostname: desktop.gomydesk.com
+  enabled:
+    dev: false
+    staging: true
+    prod: true
+  hostname:
+    staging: desktop-staging.gomydesk.com
+    prod: desktop.gomydesk.com
   ingressClassName: nginx
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: 'HTTPS'
@@ -70,81 +79,29 @@ vdi:
     # vdi.spec.userdataSpec -- If configured, enables userdata persistence with
     # the given PVC spec. Every user will receive their own PV with the provided configuration.
     userdataSpec:
-      storageClassName: efs-sc
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 1G
+      storageClassName:
+        dev: standard
+        staging: efs-sc
+        prod: efs-sc
+
     # vdi.spec.app -- App level configurations for `gomydesk`.
     # @default -- The values described below are the same as the `VDICluster` CRD defaults.
     app:
       # vdi.spec.app.image -- The image to use for app pods.
       # @default -- `ghcr.io/gomydesk/app:${VERSION}`
-      # image: 'ghcr.io/gomydesk/app:${VERSION}'
-      # vdi.spec.app.corsEnabled -- Enables CORS headers in API responses.
-      corsEnabled: true
-      # vdi.spec.app.auditLog -- Enables a detailed audit log of API events.
-      # At the moment, these just get logged to stdout on the app instance.
-      auditLog: false
+      image:
+        dev: 'localhost:5000/gomydesk/app'
+        staging: 'ghcr.io/gomydesk/app'
+        prod: 'ghcr.io/gomydesk/app'
+
       # vdi.spec.app.replicas -- The number of app replicas to run.
-      replicas: 1
+      replicas:
+        dev: 1
+        staging: 1
+        prod: 1
       # vdi.spec.app.serviceType -- The type of service to create in front of the app instance.
       serviceType: ClusterIP
       # vdi.spec.app.serviceAnnotations -- Extra annotations to place on the gomydesk app service.
-      serviceAnnotations: {}
-      # vdi.spec.app.tls -- TLS configurations for the app instance.
-      tls:
-        # vdi.spec.app.tls.serverSecret -- A pre-existing TLS secret to use for the HTTPS listener on the app instance.
-        # If not provided, one is generated for you.
-        serverSecret: ''
-      # vdi.spec.app.resources -- Resource limits for the app pods.
-      resources: {}
-    # vdi.spec.metrics -- Metrics configurations for `gomydesk`.
-    metrics:
-      # vdi.spec.metrics.serviceMonitor -- Configurations for creating a ServiceMonitor object to
-      # scrape `gomydesk` metrics.
-      serviceMonitor:
-        # vdi.spec.metrics.serviceMonitor.create -- Set to true to have `gomydesk` create a ServiceMonitor.
-        # There is an example dashboard in the [examples](../../examples/example-grafana-dashboard.json) directory.
-        create: true
-        # vdi.spec.metrics.serviceMonitor.labels -- Extra labels to apply to the ServiceMonitor object.
-        labels:
-          release: prometheus
-    # vdi.spec.auth -- Authentication configurations for `gomydesk`.
-    # @default -- The values described below are the same as the `VDICluster` CRD defaults.
-    auth:
-      # vdi.spec.auth.allowAnonymous -- Allow anonymous users to launch and use desktops.
-      allowAnonymous: false
-      # vdi.spec.auth.adminSecret -- The secret to store the generated admin password in.
-      adminSecret: gomydesk-admin-secret
-      # vdi.spec.auth.tokenDuration -- The time-to-live for access tokens issued to users.
-      # If using OIDC/Oauth, you probably want to set this to a higher value, since refreshing
-      # tokens is currently not supported.
-      tokenDuration: '15m'
-      # vdi.spec.auth.localAuth -- Use local-auth for the authentication backend. This is the default configuration.
-      localAuth: {}
-      # vdi.spec.auth.ldapAuth -- (object) Use an LDAP server for the authentication backend. See the [API reference](../../../doc/crds.md#LDAPConfig) for available configurations.
-      ldapAuth: {}
-      # vdi.spec.auth.oidcAuth -- (object) Use an OpenID/Oauth provider for the authentication backend. See the [API reference](../../../doc/crds.md#OIDCConfig) for available configurations.
-      oidcAuth: {}
-    # vdi.spec.secrets -- Secret storage configurations for `gomydesk`.
-    # @default -- The values described below are the same as the `VDICluster` CRD defaults.
-    secrets:
-      # vdi.spec.secrets.k8sSecret -- Use the Kubernetes secret storage backend. This is the default
-      # if no other configuration is provided. For now, see the API reference for what to
-      # use in place of these values if using a different backend.
-      k8sSecret:
-        # vdi.spec.secrets.k8sSecret.secretName -- The name of the Kubernetes `Secret`.
-        # backing the secret storage.
-        secretName: gomydesk-app-secrets
-      # vdi.spec.secrets.vault -- (object) Use vault for the secret storage backend. See the [API reference](../../../doc/crds.md#VaultConfig) for available configurations.
-      vault: {}
-    # vdi.spec.desktops -- Global configurations for desktop sessions.
-    desktops:
-      # vdi.spec.desktops.maxSessionLength -- When configured, desktop sessions will be terminated after running
-      # for the specified period of time. Values are in duration formats (e.g. `3m`, `2h`, `1d`).
-      maxSessionLength: ''
 
   # vdi.templates -- Preload DesktopTemplates into the VDI Cluster. You only need to define
   # the `metadata` and `spec`. Namespaces can be ignored sinced DesktopTemplates are cluster-scoped.

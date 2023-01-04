@@ -1,3 +1,6 @@
+{{- $manager_repo := index $.Values.manager.image.repository $.Values.env }}
+{{- if not $manager_repo }}{{ fail (printf "manager_repo info required: %s" $.Values.env) }}{{ end -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,6 +14,11 @@ spec:
       {{- include "gomydesk.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8443"
+        prometheus.io/path: "/api/metrics"
+        prometheus.io/scheme: 'https'
       labels:
         {{- include "gomydesk.labels" . | nindent 8 }}
     spec:
@@ -31,7 +39,7 @@ spec:
             - --leader-elect
           command:
             - /manager
-          image: {{ .Values.manager.image.repository }}:{{ default .Chart.AppVersion .Values.manager.image.tag }}
+          image: {{ $manager_repo }}:{{ default .Chart.AppVersion .Values.manager.image.tag }}
           imagePullPolicy: {{ .Values.manager.image.pullPolicy }}
           livenessProbe:
             httpGet:
